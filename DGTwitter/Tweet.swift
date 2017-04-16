@@ -34,13 +34,17 @@ class Tweet: NSObject {
             profileUrl = URL(string: profilePictureString)
         }
         
-        if let verifiedInt = user["verified"] as? Int {
-            if verifiedInt == 1 {
-                isVerified = true
-            } else {
-                isVerified = false
-            }
-        }
+        
+//        let verifiedString = user["verified"] as? String
+//        print("user : \(user)")
+//        print("ver string: \(verifiedString)")
+//        if verifiedString == "1" {
+//            isVerified = true
+//        } else {
+//            isVerified = false
+//        }
+
+        
         
         let screenNameText = user["screen_name"] as? String
         screenName = "@\(screenNameText!)"
@@ -64,7 +68,6 @@ class Tweet: NSObject {
         dateComponentsFormatter.maximumUnitCount = 1
         dateComponentsFormatter.unitsStyle = .full
         let timeDiff = dateComponentsFormatter.string(from: timeStamp!, to: Date())  // "1 month"
-        print("time diff : \(timeDiff)")
         timeStampString = timeDiff
 //        print("time stamp is: \(timeStamp)")
     }

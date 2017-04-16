@@ -28,12 +28,13 @@ class TweetCell: UITableViewCell {
             
             
             if let verifiedStatus = tweet?.isVerified {
+                print("verified status: \(verifiedStatus)")
                 if verifiedStatus == false {
                     verifiedImageView.isHidden = true
                 }
             }
             if let timeStamp = tweet?.timeStampString {
-                print("here and timeStamp is: \(timeStamp)")
+                
                 timestampLabel.text = timeStamp
             }
         }
