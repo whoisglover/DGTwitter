@@ -63,6 +63,7 @@ class Tweet: NSObject {
             timeStamp = formatter.date(from: timestampString)
         }
         
+        
         let dateComponentsFormatter = DateComponentsFormatter()
         dateComponentsFormatter.allowedUnits = [.second, .minute, .hour]
         dateComponentsFormatter.maximumUnitCount = 1

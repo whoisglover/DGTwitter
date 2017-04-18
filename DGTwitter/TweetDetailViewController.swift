@@ -19,6 +19,10 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var handleLabel: UILabel!
     @IBOutlet weak var tweetText: UILabel!
     
+    @IBOutlet weak var retweetsLabel: UILabel!
+    
+    @IBOutlet weak var likesLabel: UILabel!
+    
     
     var tweet: Tweet?
 
@@ -33,6 +37,14 @@ class TweetDetailViewController: UIViewController {
         if let screenName = tweet?.screenName {
             print("here and screenName: \(screenName)")
             handleLabel.text = screenName
+        }
+        
+        if let retweets = tweet?.retweetCount {
+            retweetsLabel.text = "\(retweets) Retweets"
+        }
+        
+        if let favorites = tweet?.favoriteCount {
+            likesLabel.text = "\(favorites) Favorites"
         }
         
         nameLabel.text = tweet?.userName

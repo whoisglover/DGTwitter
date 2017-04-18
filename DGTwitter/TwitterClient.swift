@@ -30,6 +30,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         fetchRequestToken(withPath: "/oauth/request_token", method: "GET", callbackURL: URL(string: "dgtwitter://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential!) -> Void in
             print("I got a token! \(requestToken!.token!)")
             let url = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token!)")
+            print(url)
             UIApplication.shared.open(url!, options: [:], completionHandler: { (bool: Bool) -> Void in
                 print("completion handler fired")
             })
@@ -76,7 +77,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             // code here
             let dictionaries = response as! [NSDictionary]
             let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
-            
+        
             success(tweets)
             
         }, failure: { (task, error) -> Void in
@@ -101,5 +102,23 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
         
     }
+    
+    func sendTweet(message: String, reply_id:String?, success:@escaping (Any?) -> (), failure:@escaping (Error) -> ()) {
+        let url = "1.1/statuses/update.json?"
+        var params = "status=\(message)"
+        if reply_id != nil {
+            params += "&in_reply_to_status_id=\(reply_id!)"
+        }
+        params = params.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        
+        post(url+params, parameters: nil, success: {
+            (task: URLSessionDataTask,response: Any?) -> Void in
+            success(response)
+        }, failure: {(task: URLSessionDataTask?, error: Error?) -> Void in
+            failure(error!)
+        })
+    }
+
     
 }

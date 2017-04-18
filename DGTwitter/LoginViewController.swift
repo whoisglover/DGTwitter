@@ -13,9 +13,11 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = UIColor(red: 64.0/255.0, green: 153.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         // Do any additional setup after loading the view.
     }
+    
+//    64,153,255
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

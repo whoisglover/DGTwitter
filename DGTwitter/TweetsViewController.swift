@@ -45,6 +45,14 @@ class TweetsViewController: UIViewController {
         tweetsTableView.rowHeight = UITableViewAutomaticDimension
         tweetsTableView.estimatedRowHeight = 250
         
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "tweetSent"), object: nil, queue: OperationQueue.main, using: {
+            (Notification) -> Void in
+            let tweetObject = Notification.object as! NSDictionary
+            let tweet = Tweet(dictionary: tweetObject)
+            self.tweets.insert(tweet, at: 0)
+            self.tweetsTableView.reloadSections([0], with: .automatic)
+        })
+        
     }
     
     func titleWasTapped() {
@@ -100,8 +108,6 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
         vc.tweet = tweet
         tableView.deselectRow(at: indexPath, animated: true)
         navigationController?.pushViewController(vc, animated: true)
-        
-        
         
     }
 

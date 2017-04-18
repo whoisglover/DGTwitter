@@ -16,16 +16,26 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var verifiedImageView: UIImageView!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var handleLabel: UILabel!
+    
+    @IBOutlet weak var repliesLabel: UILabel!
+    
+    @IBOutlet weak var retweetsLabel: UILabel!
+    
+    @IBOutlet weak var favoritesLabel: UILabel!
+    
     
     var tweet: Tweet? {
         didSet {
             tweetTextLabel.text = tweet?.text
             usernameLabel.text = tweet?.userName
-            print("in didset and tweet: \(tweet)")
+            
+            retweetsLabel.text = "\(tweet?.retweetCount ?? 0)"
+            favoritesLabel.text = "\(tweet?.favoriteCount ?? 0)"
             
             profileImageView.setImageWith((tweet?.profileUrl!)!)
             profileImageView.layer.cornerRadius = 4
-            
+            handleLabel.text = tweet?.screenName
             
             if let verifiedStatus = tweet?.isVerified {
                 print("verified status: \(verifiedStatus)")
